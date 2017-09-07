@@ -12,7 +12,7 @@ count=0
 
 #You can change the dir to modify the day you want to process.
 rootdir='By10min'
-daydir="5_15_10min"
+daydir="5_16_10min"
 dir=rootdir+'/'+daydir
 
 for num in range(144):
