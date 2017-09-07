@@ -32,8 +32,8 @@ def get_csv(dir,pattern):
                 print filepath+"wrong"
     return df  
                 
-date="13"
-save_path="By10min/5_13_10min"
+date="15"
+save_path="By10min/5_15_10min"
          
 dir="/media/tjx/768C23788C2331D3/DataForTraffic/20170511_15/{0}".format(date)
 
