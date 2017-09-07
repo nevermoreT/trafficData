@@ -32,10 +32,10 @@ def get_csv(dir,pattern):
                 print filepath+"wrong"
     return df  
                 
-date="5"
-save_path="5_5_10min"
+date="13"
+save_path="By10min/5_13_10min"
          
-dir="/media/tjx/768C23788C2331D3/20170501_05/{0}".format(date)
+dir="/media/tjx/768C23788C2331D3/DataForTraffic/20170511_15/{0}".format(date)
 
 beginDate=pd.to_datetime("2017/5/{0} 00:00:00".format(date))
 endDate=pd.to_datetime("2017/5/{0} 23:50:00".format(date))
@@ -48,9 +48,9 @@ while beginDate<=endDate:
     num=int((beginDate-zeroTime)/delta)
     
     if num/6<10:
-        pattern="rImport_ysb_2017050{0}0{1}{2}[0-9]".format(date,num/6,num%6)
+        pattern="rImport_ysb_201705{0}0{1}{2}[0-9]".format(date,num/6,num%6)
     else:
-        pattern="rImport_ysb_2017050{0}{1}{2}[0-9]".format(date,num/6,num%6)
+        pattern="rImport_ysb_201705{0}{1}{2}[0-9]".format(date,num/6,num%6)
     #print pattern
     
     date1=beginDate;
