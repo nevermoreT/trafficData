@@ -20,6 +20,7 @@ def get_csv(dir,pattern):
     df=DataFrame()
     for  filename in os.listdir(dir):
         if  re.match(pattern, filename):
+            #print filename
             filepath=dir+'/'+filename
             try:
                 if flag:
@@ -32,10 +33,10 @@ def get_csv(dir,pattern):
                 print filepath+"wrong"
     return df  
                 
-date="20"
-save_path="By10min/5_20_10min"
+date="25"
+save_path="By10min/5_{0}_10min".format(date)
          
-dir="/home/tjx/桌面/20170516_20/{0}".format(date)
+dir="/home/tjx/20170521_25/{0}".format(date)
 
 beginDate=pd.to_datetime("2017/5/{0} 00:00:00".format(date))
 endDate=pd.to_datetime("2017/5/{0} 23:50:00".format(date))
@@ -48,9 +49,9 @@ while beginDate<=endDate:
     num=int((beginDate-zeroTime)/delta)
     
     if num/6<10:
-        pattern="rImport_ysb_201705{0}0{1}{2}[0-9]".format(date,num/6,num%6)
+        pattern="rrImport_ysb_201705{0}0{1}{2}[0-9]".format(date,num/6,num%6)
     else:
-        pattern="rImport_ysb_201705{0}{1}{2}[0-9]".format(date,num/6,num%6)
+        pattern="rrImport_ysb_201705{0}{1}{2}[0-9]".format(date,num/6,num%6)
     #print pattern
     
     date1=beginDate;
