@@ -1,5 +1,7 @@
 eclipse.preferences.version=1
 encoding//trafficData/static_process/add_week.py=utf-8
 encoding//trafficData/static_process/data_process.py=utf-8
+encoding//trafficData/static_process/get_X_data.py=utf-8
+encoding//trafficData/static_process/learn_linear.py=utf-8
 encoding//trafficData/static_process/merage_all_drop_na_and_merge_pos_statistic.py=utf-8
 encoding//trafficData/static_process/statstic_nub_by_monitor_10min.py=utf-8

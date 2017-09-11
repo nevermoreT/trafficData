@@ -21,7 +21,7 @@ print cross_validation.cross_val_predict(clf, X, y, cv=5)
 #clf = linear_model.LogisticRegression(C=1.0, penalty='l1', tol=1e-6)
 clf.fit(X, y)
 
-df=pd.read_csv("add_Week_result/5_24_10min.csv")
+df=pd.read_csv("add_Week_result/5_12_10min.csv")
 df_row=df[df["监测点id"]==20104605]
 week=df[df["监测点id"]==20104605]["Week"].as_matrix()[0]
     
@@ -33,8 +33,14 @@ df_final['week']=week
 #print df_final
 dummies_Time=pd.get_dummies(df_final["time_id"], prefix="time_id")
 dummies_week=pd.get_dummies(df_final["week"], prefix="week",columns=range(1,8))
-
-df_final= pd.concat([df_final,default,dummies_Time], axis=1)
+df_final= pd.concat([df_final,default], axis=1)
+for index ,row in df_final.iterrows():
+    if row.time_id>=42 and row.time_id<=54:
+        df_final.loc[index,'is_high']=1
+    else:
+        df_final.loc[index,'is_high']=0
+        
+df_final= pd.concat([df_final,dummies_Time], axis=1)
 df_final.drop(['time_id','week'], axis=1, inplace=True)
 df_final['week_1']=0
 df_final['week_2']=0

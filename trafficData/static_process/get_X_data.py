@@ -32,6 +32,10 @@ for i in range(0,144):
 print meanList
 for index ,row in df_final.iterrows():
     df_final.loc[index,'default']=meanList[df_final['time_id'][index]]
+    if row.time_id>=42 and row.time_id<=54:
+        df_final.loc[index,'is_high']=1
+    else:
+        df_final.loc[index,'is_high']=0
 dummies_Time=pd.get_dummies(df_final["time_id"], prefix="time_id")
 dummies_week=pd.get_dummies(df_final["week"], prefix="week")
 df_final= pd.concat([df_final,dummies_Time,dummies_week], axis=1)
