@@ -7,7 +7,8 @@ import matplotlib.pyplot as plt
 from sklearn import cross_validation
 import sklearn.preprocessing as preprocessing
 import seaborn as sns
-
+from  sklearn.svm import SVR
+import filter
 def do_normalise(im):
     return -np.log(1/((1 + im)/3601) - 1)
 
@@ -27,17 +28,18 @@ print y.max()
 
 
 clf=linear_model.LinearRegression()
+#clf=SVR(kernel='linear', gamma=0.1)
 #print cross_validation.cross_val_predict(clf, X, y, cv=5)
 #clf=RandomForestRegressor(n_estimators= 60, max_depth=13, min_samples_split=110,
- #                                 min_samples_leaf=20,max_features='sqrt' ,oob_score=True, random_state=10)
+#                                 min_samples_leaf=20,max_features='sqrt' ,oob_score=True, random_state=10)
 #clf = linear_model.LogisticRegression(C=1.0, penalty='l1', tol=1e-6)
 clf.fit(X, y)
 
-df=pd.read_csv("add_Week_result/5_21_10min.csv")
-last_day_df=pd.read_csv("add_Week_result/5_20_10min.csv")
-last_day_row=last_day_df[last_day_df["监测点id"]==10100406]
-df_row=df[df["监测点id"]==10100406]
-week=df[df["监测点id"]==10100406]["Week"].as_matrix()[0]
+df=pd.read_csv("add_Week_result/5_12_10min.csv")
+last_day_df=pd.read_csv("add_Week_result/5_11_10min.csv")
+last_day_row=last_day_df[last_day_df["监测点id"]==20104605]
+df_row=df[df["监测点id"]==20104605]
+week=df[df["监测点id"]==20104605]["Week"].as_matrix()[0]
 last_day_temp=last_day_row.filter( regex="[0-9].*")
 df_temp=df_row.filter( regex="[0-9].*")
 df_final=pd.DataFrame({"nums":df_temp.T[df_temp.T.columns[0]].as_matrix(),"last_day":last_day_temp.T[last_day_temp.T.columns[0]].as_matrix(),"time_id":range(0,144)},columns=["nums","last_day","time_id"])
@@ -73,14 +75,14 @@ df_final.to_csv("test_final.csv",index=False)
 test_np=df_final.as_matrix()
 X_test=test_np[:,1:]
 y_test=test_np[:,0]
-
+y_test=filter.smooth(y_test,0.1)
 #y_test=do_normalise(y_test)
 y_predict=clf.predict(X_test)
 
 df_result=pd.DataFrame({"test":y_test,"pre":y_predict})
 
 df_result.to_csv("result_week_dummied.csv",index=False)
-print clf.coef_
+#print clf.coef_
 sub=df_result['test']-df_result['pre']
 
 score=np.abs(df_result['test']-df_result['pre']/df_result['test']).mean()

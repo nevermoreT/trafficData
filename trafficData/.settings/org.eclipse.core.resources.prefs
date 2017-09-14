@@ -2,6 +2,7 @@ eclipse.preferences.version=1
 encoding//static_process/add_week.py=utf-8
 encoding//static_process/data_process.py=utf-8
 encoding//static_process/draw.py=utf-8
+encoding//static_process/filter.py=utf-8
 encoding//static_process/get_X_data.py=utf-8
 encoding//static_process/learn_linear.py=utf-8
 encoding//static_process/merage_all_drop_na_and_merge_pos_statistic.py=utf-8
