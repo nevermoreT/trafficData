@@ -60,12 +60,16 @@ df_final.drop(['time_id','week'], axis=1, inplace=True)
 a=df_final.as_matrix()
 df_final=df_final[df_final.nums>0]
 df_final=df_final[df_final.nums<1000]
-df_final['nums']=filter.smooth(df_final['nums'].as_matrix(),0.1)
-df_final.to_csv("X_default_history.csv",index=False)
+
 
 fig = plt.figure()
 fig.set(alpha=0.2)  # 设定图表颜色alpha参数
-df_final['nums'].plot()
-plt.plot(filter.smooth(df_final['nums'].as_matrix(), 0.5))
+#df_final['nums'].plot()
+print len(df_final['nums'])
+print len(filter.smooth(df_final['nums'].as_matrix(),0.5))
+plt.plot(df_final['nums'].as_matrix(),label='nums')
+plt.plot(filter.smooth(df_final['nums'].as_matrix(), 0.3),label='nums_smooth')
 plt.show()
 
+df_final['nums']=filter.smooth(df_final['nums'].as_matrix(),0.5)
+df_final.to_csv("X_default_history.csv",index=False)

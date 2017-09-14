@@ -75,7 +75,7 @@ df_final.to_csv("test_final.csv",index=False)
 test_np=df_final.as_matrix()
 X_test=test_np[:,1:]
 y_test=test_np[:,0]
-y_test=filter.smooth(y_test,0.1)
+y_test=filter.smooth(y_test,0.5)
 #y_test=do_normalise(y_test)
 y_predict=clf.predict(X_test)
 
