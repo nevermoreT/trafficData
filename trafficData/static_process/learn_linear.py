@@ -37,9 +37,9 @@ clf.fit(X, y)
 
 df=pd.read_csv("add_Week_result/5_12_10min.csv")
 last_day_df=pd.read_csv("add_Week_result/5_11_10min.csv")
-last_day_row=last_day_df[last_day_df["监测点id"]==20104605]
-df_row=df[df["监测点id"]==20104605]
-week=df[df["监测点id"]==20104605]["Week"].as_matrix()[0]
+last_day_row=last_day_df[last_day_df["监测点id"]==10104301]
+df_row=df[df["监测点id"]==10104301]
+week=df[df["监测点id"]==10104301]["Week"].as_matrix()[0]
 last_day_temp=last_day_row.filter( regex="[0-9].*")
 df_temp=df_row.filter( regex="[0-9].*")
 df_final=pd.DataFrame({"nums":df_temp.T[df_temp.T.columns[0]].as_matrix(),"last_day":last_day_temp.T[last_day_temp.T.columns[0]].as_matrix(),"time_id":range(0,144)},columns=["nums","last_day","time_id"])
@@ -75,7 +75,7 @@ df_final.to_csv("test_final.csv",index=False)
 test_np=df_final.as_matrix()
 X_test=test_np[:,1:]
 y_test=test_np[:,0]
-y_test=filter.smooth(y_test,0.5)
+y_test=filter.smooth(y_test,0.3)
 #y_test=do_normalise(y_test)
 y_predict=clf.predict(X_test)
 
